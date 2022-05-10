@@ -1,27 +1,44 @@
-import React from 'react';
-import logo from '../../assets/img/logo.svg';
-import Greetings from '../../containers/Greetings/Greetings';
+import React, { useEffect } from 'react';
 import './Popup.css';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Button } from '@blueprintjs/core';
 
 const Popup = () => {
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently, setToken } =
+    useAuth0();
+
+  const getToken = async () => {
+    try {
+      const token = await getAccessTokenSilently();
+      setToken(token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
+    <div>
+      <Button
+        id="loginButton"
+        variant="contained"
+        color="primary"
+        onClick={() =>
+          chrome.tabs.create({
+            url: `${window.location.origin}/options.html`,
+          })
+        }
+      >
+        Start here
+      </Button>
+      <h4>{isAuthenticated ? 'Authenticated' : 'notAuthenticated'}</h4>
     </div>
   );
 };
-
 export default Popup;

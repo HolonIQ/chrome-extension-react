@@ -32,8 +32,10 @@ var fileExtensions = [
 if (fileSystem.existsSync(secretsPath)) {
   alias['secrets'] = secretsPath;
 }
-
+const dotEnv = require('dotenv-webpack');
 var options = {
+
+
   mode: process.env.NODE_ENV || 'development',
   entry: {
     newtab: path.join(__dirname, 'src', 'pages', 'Newtab', 'index.jsx'),
@@ -111,7 +113,10 @@ var options = {
   },
   plugins: [
     new CleanWebpackPlugin({ verbose: false }),
-    new webpack.ProgressPlugin(),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+    new dotEnv({path:'./.env'}),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV']),
     new CopyWebpackPlugin({
@@ -195,6 +200,7 @@ var options = {
     level: 'info',
   },
 };
+
 
 if (env.NODE_ENV === 'development') {
   options.devtool = 'cheap-module-source-map';
