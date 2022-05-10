@@ -7,6 +7,7 @@ import Popup from './Popup';
 const domain = process.env.AUTH_DOMAIN;
 const clientId = process.env.AUTH_CLIENTID;
 const audience = process.env.AUTH_AUDIENCE;
+
 render(
   <Auth0Provider domain={domain} clientId={clientId} audience={audience}>
     <Popup />
