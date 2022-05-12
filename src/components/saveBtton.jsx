@@ -1,7 +1,5 @@
 import { Button, Toaster } from '@blueprintjs/core';
-import { Axios } from 'axios';
 import React, { useState } from 'react';
-import { extractDomain } from './extractDomain';
 
 const AlarmToaster = Toaster.create({
   className: 'recipe-toaster',

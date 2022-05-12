@@ -37,7 +37,13 @@
 .header {
   height: 100px;
   text-align: center;
-  background-color: cadetblue;
+  background-color: rgba(84, 181, 255, 1);
+}
+.spinner {
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
 @keyframes App-logo-spin {
   from {

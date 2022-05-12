@@ -7,18 +7,19 @@ import {
   Divider,
   H3,
   H5,
+  Spinner,
   Tooltip,
 } from '@blueprintjs/core';
 import MainContent from '../../components/mainContent';
 
 const Popup = () => {
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently, setToken } =
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0();
-  const [itemType, setItemType] = useState('Signal');
-  const itemTypes = ['Signal', 'Organization'];
+  const [itemType, setItemType] = useState('Organization');
+  const itemTypes = ['Organization', 'Signal'];
   const itemIcons = {
-    Signal: 'pulse',
     Organization: 'social-media',
+    Signal: 'pulse',
   };
   const getEmail = () => {
     if (isAuthenticated) {
@@ -28,18 +29,16 @@ const Popup = () => {
   };
   const getToken = async () => {
     try {
-      const token = await getAccessTokenSilently();
-      setToken(token);
+      await getAccessTokenSilently();
     } catch (e) {
       console.log(e);
     }
   };
-
   useEffect(() => {
     getToken();
   }, []);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner className="spinner" intent="primary"></Spinner>;
   }
   if (!isAuthenticated) {
     return (
