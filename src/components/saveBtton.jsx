@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { Button, Toaster } from '@blueprintjs/core';
 import React, { useState } from 'react';
 
@@ -7,8 +8,10 @@ const AlarmToaster = Toaster.create({
   maxToasts: 1,
 });
 
-const SaveButton = (email, type) => {
+const SaveButton = (type) => {
   //   console.log(email, type);
+  const { user, getIdTokenClaims } = useAuth0();
+  const { email } = user;
   const [isSaving, setIsSaving] = useState(false);
   const handleSave = () => {
     setIsSaving(true);

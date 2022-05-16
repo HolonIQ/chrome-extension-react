@@ -3,8 +3,9 @@ import SaveButton from './saveBtton';
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import OrgBreifing from './orgBreifing';
+import { Button, ButtonGroup, Divider, Tooltip } from '@blueprintjs/core';
 
-const MainContent = (email, itemType) => {
+const MainContent = () => {
   const [url, setUrl] = useState();
   const [token, setToken] = useState();
   const { getIdTokenClaims } = useAuth0();
@@ -12,7 +13,12 @@ const MainContent = (email, itemType) => {
   const axios = require('axios').default;
   const [org, setOrg] = useState();
   const [orgExists, setOrgExists] = useState(false);
-
+  const [itemType, setItemType] = useState('Organization');
+  const itemTypes = ['Organization', 'Signal'];
+  const itemIcons = {
+    Organization: 'social-media',
+    Signal: 'pulse',
+  };
   useEffect(() => {
     const getToken = async () => {
       try {
@@ -25,10 +31,14 @@ const MainContent = (email, itemType) => {
 
     !token && getToken();
   }, [getIdTokenClaims, token]);
-
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     setUrl(tabs[0].url.toString());
   });
+
+  const getSaveButton = () => {
+    if (!orgExists || itemType !== 'Organization')
+      return <SaveButton itemType={itemType} />;
+  };
 
   useEffect(() => {
     token &&
@@ -54,11 +64,35 @@ const MainContent = (email, itemType) => {
   const getOrg = () => {
     return org;
   };
-  if (!orgExists) {
-    return <SaveButton email={email} itemType={itemType} />;
-  }
-
-  return <OrgBreifing org={getOrg()} />;
+  return (
+    <div>
+      {orgExists && <OrgBreifing org={getOrg()} />}
+      <Divider style={{ marginTop: '10px' }} />
+      <ButtonGroup fill style={{ padding: '5px' }}>
+        {itemTypes.map((type) => {
+          return (
+            <Tooltip
+              content={type}
+              placement={'top'}
+              key={type}
+              usePortal={false}
+            >
+              <Button
+                icon={itemIcons[type]}
+                intent={itemType === type ? 'primary' : 'none'}
+                onClick={() => {
+                  setItemType(type);
+                }}
+              />
+            </Tooltip>
+          );
+        })}
+      </ButtonGroup>
+      <div style={{ display: 'flex', justifyContent: 'flex-end ' }}>
+        {getSaveButton()}
+      </div>
+    </div>
+  );
 };
 
 export default MainContent;
