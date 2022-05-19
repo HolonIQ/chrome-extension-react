@@ -35,9 +35,9 @@
   color: #61dafb;
 }
 .header {
-  height: 100px;
+  height: 75px;
   text-align: center;
-  background-color: rgba(84, 181, 255, 1);
+  background-color: #137cbd;
 }
 .spinner {
   left: 50%;

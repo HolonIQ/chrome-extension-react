@@ -58,13 +58,11 @@ const Popup = () => {
   }
   return (
     <div>
-      <div className="header">
-        <H3 style={{ padding: '35px' }}>Save to HolonIQ</H3>
-      </div>
+      {/* <div className="header">
+        <H3 style={{ padding: '25px', color: 'white' }}>Save to HolonIQ</H3>
+      </div> */}
 
-      <div style={{ padding: '5px' }}>
-        <MainContent />
-      </div>
+      <MainContent />
       <H5
         style={{
           textAlign: 'right',

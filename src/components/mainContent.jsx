@@ -12,7 +12,6 @@ const MainContent = () => {
   const domain = extractDomain(url);
   const axios = require('axios').default;
   const [org, setOrg] = useState();
-  const [orgExists, setOrgExists] = useState(false);
   const [itemType, setItemType] = useState('Organization');
   const itemTypes = ['Organization', 'Signal'];
   const itemIcons = {
@@ -36,7 +35,7 @@ const MainContent = () => {
   });
 
   const getSaveButton = () => {
-    if (!orgExists || itemType !== 'Organization')
+    if (!org || itemType !== 'Organization' || org.length === 0)
       return <SaveButton itemType={itemType} />;
   };
 
@@ -53,21 +52,15 @@ const MainContent = () => {
           domain: domain,
         },
       })
-        .then((resp) => {
-          setOrg(resp.data[0]);
+        .then(({ data }) => {
+          console.log(data.length);
+          setOrg(data);
         })
         .catch(console.error);
   }, [axios, domain, token]);
-  useEffect(() => {
-    org && setOrgExists(true);
-  }, [org]);
-  const getOrg = () => {
-    return org;
-  };
   return (
     <div>
-      {orgExists && <OrgBreifing org={getOrg()} />}
-      <Divider style={{ marginTop: '10px' }} />
+      {org && <OrgBreifing org={org} />}
       <ButtonGroup fill style={{ padding: '5px' }}>
         {itemTypes.map((type) => {
           return (
