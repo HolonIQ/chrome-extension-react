@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension For HolonIQ",
+  "name": "HolonIQ chrome extension",
   "description": "Save Data To HolonIQ",
   "options_page": "options.html",
 
