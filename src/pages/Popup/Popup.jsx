@@ -1,19 +1,12 @@
 import React, { useEffect } from 'react';
 import './Popup.css';
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button, H3, H5, Spinner } from '@blueprintjs/core';
+import { Button, H3, H5, H6, Spinner } from '@blueprintjs/core';
 import MainContent from '../../components/mainContent';
+import { Footer } from '../../components/footer';
 
 const Popup = () => {
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
-    useAuth0();
-
-  const getEmail = () => {
-    if (isAuthenticated) {
-      const { email } = user;
-      return email;
-    }
-  };
+  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
   const getToken = async () => {
     try {
       await getAccessTokenSilently();
@@ -62,16 +55,18 @@ const Popup = () => {
       </div> */}
 
       <MainContent />
-      <H5
+      {/* <p
         style={{
           textAlign: 'right',
-          bottom: '0px',
-          position: 'relative',
-          padding: '5px',
+          padding: 5,
+          margin: 0,
+          fontWeight: 300,
+          color: 'gray',
         }}
       >
         {getEmail()}
-      </H5>
+      </p> */}
+      <Footer />
     </div>
   );
 };

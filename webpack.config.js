@@ -58,6 +58,10 @@ var options = {
   module: {
     rules: [
       {
+        test: /\.(png|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+      {
         // look for .css or .scss files
         test: /\.(css|scss)$/,
         // in the `src` directory
@@ -150,7 +154,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-128.png',
+          from: 'src/assets/img/icon-big.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },
@@ -159,7 +163,7 @@ var options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/assets/img/icon-34.png',
+          from: 'src/assets/img/icon.png',
           to: path.join(__dirname, 'build'),
           force: true,
         },

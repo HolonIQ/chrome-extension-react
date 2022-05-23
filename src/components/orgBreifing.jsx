@@ -5,9 +5,7 @@ import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 import { formatNumber } from './numberFormat';
 const OrgBreifing = ({ org }) => {
   const _org = org?.find((f) => f);
-  console.log(_org);
   const handleOnClick = (option) => {
-    console.log(option);
     switch (option) {
       case 'detail':
         chrome.tabs.create({

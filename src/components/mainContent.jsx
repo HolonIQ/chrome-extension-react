@@ -1,9 +1,8 @@
 import { extractDomain } from './extractDomain';
-import SaveButton from './saveBtton';
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import OrgBreifing from './orgBreifing';
-import { Button, ButtonGroup, Spinner, Tooltip } from '@blueprintjs/core';
+import { Spinner } from '@blueprintjs/core';
 
 const MainContent = () => {
   const [url, setUrl] = useState();
@@ -12,12 +11,6 @@ const MainContent = () => {
   const domain = extractDomain(url);
   const axios = require('axios').default;
   const [org, setOrg] = useState();
-  const [itemType, setItemType] = useState('Organization');
-  const itemTypes = ['Organization', 'Signal'];
-  const itemIcons = {
-    Organization: 'social-media',
-    Signal: 'pulse',
-  };
 
   const [isLoading, setLoading] = useState(true);
 
@@ -37,11 +30,6 @@ const MainContent = () => {
     setUrl(tabs[0].url.toString());
   });
 
-  const getSaveButton = () => {
-    if (!org || itemType !== 'Organization' || org.length === 0)
-      return <SaveButton itemType={itemType} />;
-  };
-
   useEffect(() => {
     token &&
       domain &&
@@ -56,7 +44,6 @@ const MainContent = () => {
         },
       })
         .then(({ data }) => {
-          console.log(data.length);
           setOrg(data);
           setLoading(false);
         })
@@ -68,29 +55,8 @@ const MainContent = () => {
   return (
     <div>
       {org && <OrgBreifing org={org} />}
-      <ButtonGroup fill style={{ padding: '5px' }}>
-        {itemTypes.map((type) => {
-          return (
-            <Tooltip
-              content={type}
-              placement={'top'}
-              key={type}
-              usePortal={false}
-            >
-              <Button
-                icon={itemIcons[type]}
-                intent={itemType === type ? 'primary' : 'none'}
-                onClick={() => {
-                  setItemType(type);
-                }}
-              />
-            </Tooltip>
-          );
-        })}
-      </ButtonGroup>
-      <div style={{ display: 'flex', justifyContent: 'flex-end ' }}>
-        {getSaveButton(itemType)}
-      </div>
+
+      {/* <SubmitNavBar org={org} /> */}
     </div>
   );
 };
