@@ -1,47 +1,46 @@
 import React from 'react';
-import { Button, Card, H4, H6, Intent, Icon, Divider } from '@blueprintjs/core';
+import { Button, Card, H4, H6, Intent } from '@blueprintjs/core';
 import './components.css';
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
-
+import { formatNumber } from './numberFormat';
 const OrgBreifing = ({ org }) => {
   const _org = org?.find((f) => f);
   console.log(_org);
-  const baseRUL = 'https://dev.holoniq.com/';
-
   const handleOnClick = (option) => {
     console.log(option);
     switch (option) {
       case 'detail':
         chrome.tabs.create({
           active: true,
-          url: `${baseRUL}organizations/${_org?.id}`, //BawseURL need to be changed
+          url: `${process.env.BASE_URL}organizations/${_org?.id}`,
         });
         break;
       case 'sector':
         chrome.tabs.create({
           active: true,
-          url: `${baseRUL}markets/sector/${_org?.sector_id}`, //BawseURL need to be changed
+          url: `${process.env.BASE_URL}markets/sector/${_org?.sector_id}`,
         });
         break;
       case 'subsector':
         chrome.tabs.create({
           active: true,
-          url: `${baseRUL}markets/subsector/${_org?.subsector_id}/#overview`, //BawseURL need to be changed
+          url: `${process.env.BASE_URL}markets/subsector/${_org?.subsector_id}/#overview`,
         });
         break;
       case 'cluster':
         chrome.tabs.create({
           active: true,
-          url: `${baseRUL}markets/cluster/${_org?.landscape_id}/#overview`, //BawseURL need to be changed
+          url: `${process.env.BASE_URL}markets/cluster/${_org?.landscape_id}/#overview`,
         });
         break;
       default:
     }
   };
+
   if (org.length === 0) {
     return (
       <Card style={{ textAlign: 'center' }}>
-        <H4> No Info has been found</H4>
+        <H4> No information has been found for this domain</H4>
         <H6> Would you like to send request to our data team</H6>
       </Card>
     );
@@ -130,27 +129,29 @@ const OrgBreifing = ({ org }) => {
       <div className="info">
         <p className="hiq-text-grey">Employee</p>
         <p style={{ fontWeight: '600' }}>
-          {_org?.metrics?.find((f) => f.type === 'Employee')?.value || '-'}
+          {_org?.metricRanges?.find((f) => f.type_id === 20)?.value || '-'}
         </p>
       </div>
 
       <div className="info">
         <p className="hiq-text-grey">Revenue</p>
         <p style={{ fontWeight: '600' }}>
-          {_org?.metrics?.find((f) => f.type === 'Revenue')?.value || '-'}
+          {_org?.metricRanges?.find((f) => f.type_id === 22)?.value || '-'}
         </p>
       </div>
 
       <div className="info">
         <p className="hiq-text-grey">Funding</p>
         <p style={{ fontWeight: '600' }}>
-          {_org?.metrics?.find((f) => f.type === 'Funding')?.value || '-'}
+          {_org?.metricRanges?.find((f) => f.type_id === 21)?.value || '-'}
         </p>
       </div>
       <div className="info">
         <p className="hiq-text-grey">Monthly Web Visits</p>
-        <p style={{ fontWeight: '600' }}>{'-'}</p>
-        {/* needs to find the table from db */}
+        <p style={{ fontWeight: '600' }}>
+          {formatNumber(_org?.metrics?.find((f) => f.type_id === 12)?.value) ||
+            '-'}
+        </p>
       </div>
     </Card>
   );

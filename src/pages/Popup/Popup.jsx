@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Popup.css';
 import { useAuth0 } from '@auth0/auth0-react';
-import {
-  Button,
-  ButtonGroup,
-  Divider,
-  H3,
-  H5,
-  Spinner,
-  Tooltip,
-} from '@blueprintjs/core';
+import { Button, H3, H5, Spinner } from '@blueprintjs/core';
 import MainContent from '../../components/mainContent';
 
 const Popup = () => {
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } =
     useAuth0();
-  // const [itemType, setItemType] = useState('Organization');
-  // const itemTypes = ['Organization', 'Signal'];
-  // const itemIcons = {
-  //   Organization: 'social-media',
-  //   Signal: 'pulse',
-  // };
+
   const getEmail = () => {
     if (isAuthenticated) {
       const { email } = user;
@@ -42,18 +29,30 @@ const Popup = () => {
   }
   if (!isAuthenticated) {
     return (
-      <Button
-        id="loginButton"
-        variant="contained"
-        color="primary"
-        onClick={() =>
-          chrome.tabs.create({
-            url: `${window.location.origin}/options.html`,
-          })
-        }
-      >
-        Login
-      </Button>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="header">
+          <H3 style={{ padding: '25px', color: 'white' }}>
+            Welcome to HolonIQ
+          </H3>
+        </div>
+        <H5 style={{ alignSelf: 'center', marginTop: '60px' }}>
+          {' '}
+          Please login to your HolonIQ account
+        </H5>
+        <Button
+          style={{ margin: '30px', marginTop: '80px' }}
+          large
+          intent="primary"
+          id="loginButton"
+          onClick={() =>
+            chrome.tabs.create({
+              url: `${process.env.BASE_URL}`,
+            })
+          }
+        >
+          Login
+        </Button>
+      </div>
     );
   }
   return (

@@ -3,7 +3,7 @@ import SaveButton from './saveBtton';
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import OrgBreifing from './orgBreifing';
-import { Button, ButtonGroup, Divider, Tooltip } from '@blueprintjs/core';
+import { Button, ButtonGroup, Spinner, Tooltip } from '@blueprintjs/core';
 
 const MainContent = () => {
   const [url, setUrl] = useState();
@@ -18,6 +18,9 @@ const MainContent = () => {
     Organization: 'social-media',
     Signal: 'pulse',
   };
+
+  const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
     const getToken = async () => {
       try {
@@ -55,9 +58,13 @@ const MainContent = () => {
         .then(({ data }) => {
           console.log(data.length);
           setOrg(data);
+          setLoading(false);
         })
         .catch(console.error);
   }, [axios, domain, token]);
+  if (isLoading) {
+    return <Spinner className="spinner" intent="primary"></Spinner>;
+  }
   return (
     <div>
       {org && <OrgBreifing org={org} />}
@@ -82,7 +89,7 @@ const MainContent = () => {
         })}
       </ButtonGroup>
       <div style={{ display: 'flex', justifyContent: 'flex-end ' }}>
-        {getSaveButton()}
+        {getSaveButton(itemType)}
       </div>
     </div>
   );

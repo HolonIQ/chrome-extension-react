@@ -8,8 +8,8 @@ const AlarmToaster = Toaster.create({
   maxToasts: 1,
 });
 
-const SaveButton = (type) => {
-  //   console.log(email, type);
+const SaveButton = ({ itemType }) => {
+  console.log(itemType);
   const { user, getIdTokenClaims } = useAuth0();
   const { email } = user;
   const [isSaving, setIsSaving] = useState(false);
@@ -49,7 +49,7 @@ const SaveButton = (type) => {
         onClick={handleSave}
         loading={isSaving}
       >
-        Save
+        {itemType === 'Organization' ? 'Send' : 'Save'}
       </Button>
     </div>
   );

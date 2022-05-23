@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 const EXCEPTION_DOMAINS = [
   'wordpress.com',
   'wix.com',
