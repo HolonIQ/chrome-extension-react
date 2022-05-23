@@ -13,7 +13,7 @@ export const Footer = () => {
   return (
     <div
       style={{
-        padding: 3,
+        padding: 5,
         marginTop: 5,
         display: 'flex',
         flexDirection: 'row-reverse',
