@@ -10,25 +10,25 @@ const OrgBreifing = ({ org }) => {
       case 'detail':
         chrome.tabs.create({
           active: true,
-          url: `${process.env.BASE_URL}organizations/${_org?.id}`,
+          url: `${process.env.BASE_URL}/organizations/${_org?.id}`,
         });
         break;
       case 'sector':
         chrome.tabs.create({
           active: true,
-          url: `${process.env.BASE_URL}markets/sector/${_org?.sector_id}`,
+          url: `${process.env.BASE_URL}/markets/sector/${_org?.sector_id}`,
         });
         break;
       case 'subsector':
         chrome.tabs.create({
           active: true,
-          url: `${process.env.BASE_URL}markets/subsector/${_org?.subsector_id}/#overview`,
+          url: `${process.env.BASE_URL}/markets/subsector/${_org?.subsector_id}/#overview`,
         });
         break;
       case 'cluster':
         chrome.tabs.create({
           active: true,
-          url: `${process.env.BASE_URL}markets/cluster/${_org?.landscape_id}/#overview`,
+          url: `${process.env.BASE_URL}/markets/cluster/${_org?.landscape_id}/#overview`,
         });
         break;
       default:

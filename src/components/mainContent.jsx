@@ -5,6 +5,8 @@ import OrgBreifing from './orgBreifing';
 import { Spinner } from '@blueprintjs/core';
 import SubmitNavBar from './submitNavBar';
 
+const ORG_API = `${process.env.API_URL_PROD}/org`;
+
 const MainContent = () => {
   const [url, setUrl] = useState();
   const [token, setToken] = useState();
@@ -27,6 +29,7 @@ const MainContent = () => {
 
     !token && getToken();
   }, [getIdTokenClaims, token]);
+
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     setUrl(tabs[0].url.toString());
   });
@@ -36,7 +39,7 @@ const MainContent = () => {
       domain &&
       axios({
         method: 'post',
-        url: process.env.ORG_API,
+        url: ORG_API,
         headers: {
           Authorization: `Bearer ${token}`,
         },
