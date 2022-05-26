@@ -1,6 +1,13 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Button, ButtonGroup, Toaster, Tooltip } from '@blueprintjs/core';
-import React, { useState } from 'react';
+import {
+  Button,
+  ButtonGroup,
+  FormGroup,
+  InputGroup,
+  Toaster,
+  Tooltip,
+} from '@blueprintjs/core';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const AlarmToaster = Toaster.create({
   className: 'recipe-toaster',
@@ -15,29 +22,20 @@ const SubmitNavBar = ({ org }) => {
     Organization: 'social-media',
     Signal: 'pulse',
   };
-  console.log(itemType);
-
+  // console.log(itemType);
+  const [title, setTitle] = useState();
+  const [url, setUrl] = useState();
   const { user, getIdTokenClaims } = useAuth0();
   const [isSaving, setIsSaving] = useState(false);
 
-  const getSaveButton = () => {
-    if (!org || itemType !== 'Organization' || org.length === 0)
-      return (
-        <Button
-          style={{
-            alignSelf: 'end',
-            marginRight: '10px',
-            marginTop: '30px',
-          }}
-          onClick={handleSave}
-          loading={isSaving}
-        >
-          {itemType === 'Organization' ? 'Send' : 'Save'}
-        </Button>
-      );
-  };
   const handleSave = () => {
     setIsSaving(true);
+    AlarmToaster.show({
+      intent: 'success',
+      message: `Submitted`,
+      timeout: 2000,
+    });
+    setIsSaving(false);
 
     //   Axios.post(process.env.NEWS_API, { news_url, user_email: email })
     //     .then(({ data: apiRes }) => {
@@ -64,6 +62,12 @@ const SubmitNavBar = ({ org }) => {
     //       });
     //     });
   };
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    setTitle(tabs[0].title.toString() || 'Title');
+  });
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    setUrl(tabs[0].url.toString() || 'URL');
+  });
 
   return (
     <div
@@ -94,7 +98,48 @@ const SubmitNavBar = ({ org }) => {
           );
         })}
       </ButtonGroup>
-      {getSaveButton()}
+      {(!org || itemType !== 'Organization' || org.length === 0) && (
+        <div
+          style={{
+            padding: 10,
+            marginTop: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch',
+          }}
+        >
+          <FormGroup label="TITLE" labelInfo="(required)">
+            {title && (
+              <InputGroup
+                defaultValue={title}
+                onChange={(event) => {
+                  setTitle(event.target.value);
+                }}
+              />
+            )}
+          </FormGroup>
+          <FormGroup label="URL" labelInfo="(required)">
+            {url && (
+              <InputGroup
+                defaultValue={url}
+                onChange={(event) => {
+                  setUrl(event.target.value);
+                }}
+              />
+            )}
+          </FormGroup>
+          <Button
+            style={{
+              alignSelf: 'end',
+              marginTop: '20px',
+            }}
+            onClick={handleSave}
+            loading={isSaving}
+          >
+            {itemType === 'Organization' ? 'Send' : 'Save'}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
