@@ -32,7 +32,6 @@ var fileExtensions = [
 if (fileSystem.existsSync(secretsPath)) {
   alias['secrets'] = secretsPath;
 }
-const dotEnv = require('dotenv-webpack');
 var options = {
 
 
@@ -120,7 +119,6 @@ var options = {
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),
-    new dotEnv({path:'./.env'}),
     // expose and write the allowed env vars on the compiled bundle
     new webpack.EnvironmentPlugin(['NODE_ENV', 'AUTH_AUDIENCE', 'AUTH_CLIENTID', 'AUTH_DOMAIN', 'API_URL', 'BASE_URL']),
     new CopyWebpackPlugin({
