@@ -2,9 +2,6 @@
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 process.env.ASSET_PATH = '/';
-// process.env.AUTH_AUDIENCE = 'https://holoniq.auth0.com/api/v2/';
-// process.env.AUTH_CLIENTID = 'h5b22E6kkiKwjgE7YQSAy2CWLusME7rC';
-// process.env.AUTH_DOMAIN = 'auth.holoniq.com';
 
 var WebpackDevServer = require('webpack-dev-server'),
   webpack = require('webpack'),

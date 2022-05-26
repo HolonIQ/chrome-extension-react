@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import OrgBreifing from './orgBreifing';
 import { Spinner } from '@blueprintjs/core';
+import SubmitNavBar from './submitNavBar';
 
 const MainContent = () => {
   const [url, setUrl] = useState();
@@ -56,7 +57,7 @@ const MainContent = () => {
     <div>
       {org && <OrgBreifing org={org} />}
 
-      {/* <SubmitNavBar org={org} /> */}
+      <SubmitNavBar org={org} />
     </div>
   );
 };
