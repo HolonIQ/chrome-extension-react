@@ -122,7 +122,7 @@ var options = {
     }),
     new dotEnv({path:'./.env'}),
     // expose and write the allowed env vars on the compiled bundle
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'AUTH_AUDIENCE', 'AUTH_CLIENTID', 'AUTH_DOMAIN', 'API_URL', 'BASE_URL']),
     new CopyWebpackPlugin({
       patterns: [
         {

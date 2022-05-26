@@ -36,7 +36,7 @@ const MainContent = () => {
       domain &&
       axios({
         method: 'post',
-        url: process.env.ORG_API,
+        url: `${process.env.API_URL}org`,
         headers: {
           Authorization: `Bearer ${token}`,
         },

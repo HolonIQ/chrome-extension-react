@@ -6,12 +6,6 @@ import MainContent from '../../components/mainContent';
 import { Footer } from '../../components/footer';
 
 const Popup = () => {
-  const domain = process.env.AUTH_DOMAIN;
-  const clientId = process.env.AUTH_CLIENTID;
-  const audience = process.env.AUTH_AUDIENCE;
-
-  console.log({ domain, clientId, audience });
-
   const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
   const getToken = useCallback(async () => {
@@ -23,7 +17,6 @@ const Popup = () => {
   }, [getAccessTokenSilently]);
 
   useEffect(() => {
-    console.log('getToken');
     getToken();
   }, [getToken]);
 
