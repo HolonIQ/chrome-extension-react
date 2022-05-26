@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './Popup.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button, H3, H5, Spinner } from '@blueprintjs/core';
@@ -6,18 +6,27 @@ import MainContent from '../../components/mainContent';
 import { Footer } from '../../components/footer';
 
 const Popup = () => {
+  const domain = process.env.AUTH_DOMAIN;
+  const clientId = process.env.AUTH_CLIENTID;
+  const audience = process.env.AUTH_AUDIENCE;
+
+  console.log({ domain, clientId, audience });
+
   const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
-  const getToken = async () => {
+
+  const getToken = useCallback(async () => {
     try {
       await getAccessTokenSilently();
     } catch (e) {
       console.log(e);
     }
-  };
+  }, [getAccessTokenSilently]);
 
   useEffect(() => {
+    console.log('getToken');
     getToken();
-  }, []);
+  }, [getToken]);
+
   if (isLoading) {
     return <Spinner className="spinner" intent="primary"></Spinner>;
   }
