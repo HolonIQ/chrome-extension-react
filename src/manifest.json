@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "HolonIQ chrome extension",
-  "description": "Save Data To HolonIQ",
+  "description": "Retrieve information from HolonIQ Platform",
   "options_page": "options.html",
 
   "background": { "service_worker": "background.bundle.js" },
@@ -26,8 +26,5 @@
       "matches": []
     }
   ],
-  "permissions": [
-    "tabs",
-    "activeTab"
-  ]
+  "permissions": ["tabs"]
 }
