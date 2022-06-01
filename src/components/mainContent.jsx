@@ -5,6 +5,8 @@ import OrgBreifing from './orgBreifing';
 import { Spinner } from '@blueprintjs/core';
 import SubmitNavBar from './submitNavBar';
 
+const ORG_API = `${process.env.API_URL}/org`;
+
 const MainContent = () => {
   const [url, setUrl] = useState();
   const [token, setToken] = useState();
@@ -37,7 +39,7 @@ const MainContent = () => {
       domain &&
       axios({
         method: 'post',
-        url: `${process.env.API_URL}org`,
+        url: ORG_API,
         headers: {
           Authorization: `Bearer ${token}`,
         },

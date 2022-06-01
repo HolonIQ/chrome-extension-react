@@ -5,8 +5,8 @@ process.env.ASSET_PATH = '/';
 process.env.AUTH_AUDIENCE = 'https://holoniq.auth0.com/api/v2/';
 process.env.AUTH_CLIENTID = 'h5b22E6kkiKwjgE7YQSAy2CWLusME7rC'
 process.env.AUTH_DOMAIN = 'auth.holoniq.com'
-process.env.BASE_URL = 'https://dev.holoniq.com'
-process.env.API_URL = 'https://be-dev.holoniq.com'
+process.env.BASE_URL = 'https://my.holoniq.com'
+process.env.API_URL = 'https://be-staging.holoniq.com'
 
 
 
