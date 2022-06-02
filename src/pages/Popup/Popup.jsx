@@ -53,22 +53,7 @@ const Popup = () => {
   }
   return (
     <div>
-      {/* <div className="header">
-        <H3 style={{ padding: '25px', color: 'white' }}>Save to HolonIQ</H3>
-      </div> */}
-
       <MainContent />
-      {/* <p
-        style={{
-          textAlign: 'right',
-          padding: 5,
-          margin: 0,
-          fontWeight: 300,
-          color: 'gray',
-        }}
-      >
-        {getEmail()}
-      </p> */}
       <Footer />
     </div>
   );

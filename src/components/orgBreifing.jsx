@@ -37,10 +37,10 @@ const OrgBreifing = ({ org }) => {
 
   if (org.length === 0) {
     return (
-      <Card style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', padding: '20px' }}>
         <H4> No information has been found for this domain</H4>
         <H6> Would you like to send request to our data team</H6>
-      </Card>
+      </div>
     );
   }
   return (
