@@ -2,7 +2,7 @@ import { extractDomain } from './extractDomain';
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import OrgBreifing from './orgBreifing';
-import { Divider, Spinner } from '@blueprintjs/core';
+import { Spinner } from '@blueprintjs/core';
 import SubmitNavBar from './submitNavBar';
 
 const ORG_API = `${process.env.API_URL}/org`;

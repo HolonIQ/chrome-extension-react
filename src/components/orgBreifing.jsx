@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, H4, H6, Intent } from '@blueprintjs/core';
+import { Button, H4, H6, Intent } from '@blueprintjs/core';
 import './components.css';
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 import { formatNumber } from './numberFormat';

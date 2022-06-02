@@ -7,7 +7,7 @@ import {
   Toaster,
   Tooltip,
 } from '@blueprintjs/core';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const AlarmToaster = Toaster.create({
   className: 'recipe-toaster',
