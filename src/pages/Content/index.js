@@ -14,6 +14,7 @@ iframe.style.top = "0px";
 iframe.style.right = "0px";
 iframe.style.zIndex = "9000000000000000000";
 iframe.style.border = "0px"; 
+iframe.style.transition = "width 0.1s ease 0s"
 iframe.src = chrome.runtime.getURL("popup.html")
 
 document.body.appendChild(iframe);
