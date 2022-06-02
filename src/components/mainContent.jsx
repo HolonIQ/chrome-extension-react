@@ -2,7 +2,7 @@ import { extractDomain } from './extractDomain';
 import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import OrgBreifing from './orgBreifing';
-import { Spinner } from '@blueprintjs/core';
+import { Divider, Spinner } from '@blueprintjs/core';
 import SubmitNavBar from './submitNavBar';
 
 const MainContent = () => {
@@ -57,8 +57,7 @@ const MainContent = () => {
   return (
     <div>
       {org && <OrgBreifing org={org} />}
-
-      <SubmitNavBar org={org} />
+      <SubmitNavBar style={{ marginTop: '5px' }} org={org} />
     </div>
   );
 };

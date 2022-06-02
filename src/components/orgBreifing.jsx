@@ -44,7 +44,7 @@ const OrgBreifing = ({ org }) => {
     );
   }
   return (
-    <Card>
+    <div style={{ padding: '20px' }}>
       <H4> {_org?.org_name}</H4>
       <H6 className="bp4-text-muted">{_org?.headline}</H6>
 
@@ -151,7 +151,7 @@ const OrgBreifing = ({ org }) => {
             '-'}
         </p>
       </div>
-    </Card>
+    </div>
   );
 };
 

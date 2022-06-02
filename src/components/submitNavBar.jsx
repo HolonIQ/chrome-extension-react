@@ -78,7 +78,7 @@ const SubmitNavBar = ({ org }) => {
         alignItems: 'stretch',
       }}
     >
-      <ButtonGroup fill style={{ padding: '5p' }}>
+      <ButtonGroup fill style={{ padding: '0px 5px' }}>
         {itemTypes.map((type) => {
           return (
             <Tooltip

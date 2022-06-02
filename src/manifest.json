@@ -6,8 +6,7 @@
 
   "background": { "service_worker": "background.bundle.js" },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
+
   },
   "icons": {
     "128": "icon-big.png"
@@ -22,8 +21,9 @@
   "devtools_page": "devtools.html",
   "web_accessible_resources": [
     {
-      "resources": ["content.styles.css", "icon-big.png", "icon.png"],
-      "matches": []
+      "resources": ["content.styles.css", "icon-big.png", "icon.png", "popup.html"],
+      "matches": ["<all_urls>"],
+      "extension_ids": ["chpppbokejhdelefdecdcdabnhcafkoe"]
     }
   ],
   "permissions": [

@@ -17,8 +17,9 @@ export const Footer = () => {
         marginTop: 5,
         display: 'flex',
         flexDirection: 'row-reverse',
-        justifyContent: 'space-between',
         alignItems: 'flex-end',
+        position: 'fixed',
+        bottom: 0,
       }}
     >
       <img
@@ -26,7 +27,12 @@ export const Footer = () => {
         height={'25px'}
         src={logo}
         alt="HIQ Logo"
-        style={{ cursor: 'pointer', marginRight: 0 }}
+        style={{
+          cursor: 'pointer',
+          marginRight: 0,
+          right: '2px',
+          position: 'fixed',
+        }}
       />
       <p
         style={{
