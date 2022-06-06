@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Popup.css';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Button, H3, H5, Spinner } from '@blueprintjs/core';
@@ -7,23 +7,27 @@ import { Footer } from '../../components/footer';
 
 const Popup = () => {
   const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const [loading, setLoading] = useState();
+  const _loading = isLoading || loading;
 
   const getToken = useCallback(async () => {
+    setLoading(true);
     try {
       await getAccessTokenSilently();
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   }, [getAccessTokenSilently]);
 
   useEffect(() => {
     getToken();
   }, [getToken]);
 
-  if (isLoading) {
+  if (_loading) {
     return <Spinner className="spinner" intent="primary"></Spinner>;
   }
-  if (!isAuthenticated) {
+  if (isAuthenticated === false) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="header">
@@ -52,9 +56,13 @@ const Popup = () => {
     );
   }
   return (
-    <div>
-      <MainContent />
-      <Footer />
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ flexGrow: 1, overflow: 'auto' }}>
+        <MainContent />
+      </div>
+      <div style={{ height: 35, flexShrink: 0 }}>
+        <Footer />
+      </div>
     </div>
   );
 };

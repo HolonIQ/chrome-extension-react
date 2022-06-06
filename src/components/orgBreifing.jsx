@@ -1,9 +1,11 @@
 import React from 'react';
-import { Button, H4, H6, Intent } from '@blueprintjs/core';
+import { Button, H4, H6, Intent, Slider } from '@blueprintjs/core';
 import './components.css';
 import { capitalizeFirstLetter } from './capitalizeFirstLetter';
 import { formatNumber } from './numberFormat';
+import { RubricSlider } from './rubricSlider';
 const OrgBreifing = ({ org }) => {
+  const sliderLabels = [0, 5, 10];
   const _org = org?.find((f) => f);
   const handleOnClick = (option) => {
     switch (option) {
@@ -46,7 +48,7 @@ const OrgBreifing = ({ org }) => {
   return (
     <div style={{ padding: '20px' }}>
       <H4> {_org?.org_name}</H4>
-      <H6 className="bp4-text-muted">{_org?.headline}</H6>
+      <H6 style={{ color: '#5c7080' }}>{_org?.headline}</H6>
 
       {/*
           <H6>Description</H6>
@@ -64,9 +66,7 @@ const OrgBreifing = ({ org }) => {
       >
         Details
       </Button>
-      <H6 style={{ marginTop: '15px' }} className="bp4-text-muted">
-        PROFILE
-      </H6>
+      <H6 style={{ color: '#5c7080', marginTop: '15px' }}>PROFILE</H6>
       <div className="info">
         <p className="hiq-text-grey">Founded </p>
         <p style={{ fontWeight: '600' }}>{_org?.founded || '-'}</p>
@@ -123,7 +123,7 @@ const OrgBreifing = ({ org }) => {
         </button>
       </div>
 
-      <H6 className="bp4-text-muted">ESTIMATES</H6>
+      <H6 style={{ color: '#5c7080', marginTop: '15px' }}>ESTIMATES</H6>
       <div className="info">
         <p className="hiq-text-grey">Employee</p>
         <p style={{ fontWeight: '600' }}>
@@ -150,6 +150,30 @@ const OrgBreifing = ({ org }) => {
           {formatNumber(_org?.metrics?.find((f) => f.type_id === 12)?.value) ||
             '-'}
         </p>
+      </div>
+      <div>
+        {/* <div
+          style={{
+            display: 'flex',
+            marginTop: '15px',
+            justifyContent: 'space-between',
+          }}
+        >
+          <H6 style={{ color: '#5c7080' }}>WORKSPACE RATING</H6>
+          <Button icon={'eraser'} minimal />
+        </div>
+        <div style={{ display: 'flex' }}>
+          <p style={{ marginRight: '40px' }} className="hiq-text-grey">
+            Weighted Total
+          </p>
+          <Slider
+            style={{ cursor: 'default', width: '120px' }}
+            value={10}
+            labelValues={sliderLabels}
+            intent={Intent.PRIMARY}
+          />
+        </div>
+        <RubricSlider /> */}
       </div>
     </div>
   );

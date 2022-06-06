@@ -1,3 +1,4 @@
+import './content.styles.css'
 chrome.runtime.onMessage.addListener(function(msg, sender){
     if(msg === "toggle"){
         console.log("message received");
@@ -6,6 +7,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender){
 })
 
 var iframe = document.createElement('iframe'); 
+iframe.className = "bp4-elevation-2"
 iframe.style.background = "white";
 iframe.style.height = "100%";
 iframe.style.width = "0px";
@@ -16,7 +18,6 @@ iframe.style.zIndex = "9000000000000000000";
 iframe.style.border = "0px"; 
 iframe.style.transition = "width 0.1s ease 0s"
 iframe.src = chrome.runtime.getURL("popup.html")
-
 document.body.appendChild(iframe);
 
 function toggle(){

@@ -59,7 +59,7 @@ const MainContent = () => {
   return (
     <div>
       {org && <OrgBreifing org={org} />}
-      <SubmitNavBar style={{ marginTop: '5px' }} org={org} />
+      {/* <SubmitNavBar style={{ marginTop: '5px' }} org={org} /> */}
     </div>
   );
 };
